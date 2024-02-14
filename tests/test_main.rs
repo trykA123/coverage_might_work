@@ -1,4 +1,4 @@
-use coverage_might_work::add;
+use crate::add;
 
 #[test]
 fn test_add() {

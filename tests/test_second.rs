@@ -1,6 +1,6 @@
 // tests/test_second.rs
 use std::io::Write; // Import Write trait
-use coverage_might_work::second;
+use crate::second;
 
 #[test]
 fn test_greet() {
