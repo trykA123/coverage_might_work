@@ -1,4 +1,4 @@
-use testing::add;
+use testing::add; // Import from main.rs
 
 #[test]
 fn test_add() {
@@ -9,4 +9,3 @@ fn test_add() {
 fn test_add2() {
     assert_eq!(add(4, 3), 7);
 }
-
