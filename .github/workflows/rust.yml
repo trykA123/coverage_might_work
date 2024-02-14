@@ -24,13 +24,13 @@ jobs:
       # - name: Generate code coverage
       #   run: cargo llvm-cov
 
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: dtolnay/rust-toolchain@nightly
         with:
           components: llvm-tools-preview
       - uses: taiki-e/install-action@cargo-llvm-cov
       - uses: taiki-e/install-action@nextest
 
-      - name: Collect coverage data
+      - name: Collect coverage data (including doctests)
         run: |
           cargo llvm-cov nextest
           cargo llvm-cov --doc
