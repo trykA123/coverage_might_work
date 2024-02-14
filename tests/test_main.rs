@@ -1,4 +1,4 @@
-use crate::add;
+use testing::add;
 
 #[test]
 fn test_add() {

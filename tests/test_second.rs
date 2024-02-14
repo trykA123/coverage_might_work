@@ -1,6 +1,6 @@
 // tests/test_second.rs
 use std::io::Write; // Import Write trait
-use crate::second;
+use testing::second;
 
 #[test]
 fn test_greet() {
