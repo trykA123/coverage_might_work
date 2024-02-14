@@ -1,5 +1,4 @@
-// tests/test_main.rs
-use testing::add;
+use coverage_might_work::main;
 
 #[test]
 fn test_add() {
