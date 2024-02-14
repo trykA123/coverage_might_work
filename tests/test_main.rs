@@ -1,4 +1,4 @@
-use coverage_might_work::main;
+use coverage_might_work::add;
 
 #[test]
 fn test_add() {
