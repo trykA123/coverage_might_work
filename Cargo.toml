@@ -9,9 +9,6 @@ edition = "2021"
 name = "testing"
 path = "src/main.rs"  # Change this to "src/main.rs" if you are using main.rs
 
-[[bin]]
-name = "second"
-path = "src/second.rs"  # Path to second.rs
 
 [dependencies]
 cargo-llvm-cov = "0.6.4"
