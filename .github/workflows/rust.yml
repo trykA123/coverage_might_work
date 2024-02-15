@@ -15,17 +15,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Set up Rust nightly
         uses: actions-rs/toolchain@v1
         with:
           toolchain: nightly
-      
+
       - name: Install grcov
         run: cargo install grcov
-      
+
       - name: Run tests with coverage
         run: |
           cargo clean
-          RUSTFLAGS="-Zinstrument-coverage" cargo test --all
+          RUSTFLAGS="-Cinstrument-coverage" cargo test --all
           grcov . --binary-path ./target/debug/ -s . -t cobertura --branch --ignore-not-existing --ignore "/*" -o cobertura.xml
