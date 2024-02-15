@@ -28,10 +28,9 @@ jobs:
         with:
           components: llvm-tools-preview
       - uses: taiki-e/install-action@cargo-llvm-cov
-      - uses: taiki-e/install-action@nextest
 
       - name: Collect coverage data
-        run: cargo llvm-cov nextest
+        run: cargo llvm-cov --cobertura
       # --all-features --workspace --lcov --output-path lcov.info
       # - name: Show code coverage results
       #   run: cat lcov.info
