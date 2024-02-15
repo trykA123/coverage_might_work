@@ -3,13 +3,13 @@ name = "coverage_might_work"
 version = "0.1.0"
 edition = "2021"
 
-[lib]
-name = "testing"
-path = "src/testing.rs"  # Separate source file for the library target
-
 [[bin]]
 name = "coverage_might_work"
 path = "src/main.rs"  # Source file for the binary target
 
+[lib]
+name = "libname"  # Name of your library
+path = "src/second.rs"  # Source file for the library
+
 [dependencies]
-cargo-llvm-cov = "0.6.4"
+cargo-llvm-cov = "0.6.5"
