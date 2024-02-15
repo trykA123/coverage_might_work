@@ -1,5 +1,5 @@
 // tests/test_main.rs
-use testing::add;
+use coverage_might_work::add; // Import the `add` function from the `coverage_might_work` crate (which includes the `main` module)
 
 #[test]
 fn test_add() {
