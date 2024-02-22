@@ -42,7 +42,8 @@ jobs:
       - name: Extract coverage percentage
         id: get_coverage
         run: |
-          COVERAGE=$(grep 'line-rate' coverage.xml | awk -F'"' '{print $4 * 100}')
+          LINE_RATE=$(grep -oP 'line-rate="\K[^"]*' coverage.xml | head -1)
+          COVERAGE=$(echo "$LINE_RATE" | awk '{printf "%.2f", $1 * 100}')
           echo "Coverage: $COVERAGE%"
           echo "::set-output name=coverage::$COVERAGE"
 
