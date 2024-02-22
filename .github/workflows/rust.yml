@@ -22,7 +22,7 @@ jobs:
       - uses: taiki-e/install-action@cargo-llvm-cov
 
       - name: Collect coverage data
-        run: cargo llvm-cov --xml --output-path coverage.xml
+        run: cargo llvm-cov --cobertura --output-path coverage.xml
           
          # Upload the coverage.xml as an artifact for the next job
       - uses: actions/upload-artifact@v3
@@ -50,4 +50,4 @@ jobs:
         run: |
           curl -X POST "${{ secrets.INFLUXDB_URL }}/api/v2/write?org=${{ secrets.INFLUXDB_ORG }}&bucket=${{ secrets.INFLUXDB_BUCKET }}&precision=s" \
           -H "Authorization: Token ${{ secrets.INFLUXDB_TOKEN }}" \
-          --data-raw "rust_code_coverage,repository=${GITHUB_REPOSITORY},branch=master coverage=${{ steps.get_coverage.outputs.coverage }}"
+          --data-raw "rust_code_coverage,repository=${GITHUB_REPOSITORY},branch=${{ github.ref_name }} coverage=${{ steps.get_coverage.outputs.coverage }}"
