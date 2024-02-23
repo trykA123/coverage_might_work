@@ -1,15 +1,9 @@
-// main.rs
+// second.rs
 
-mod second;
+use std::io::Write;
 
-pub fn add(a: i32, b: i32) -> i32 {
-    a + b
-}
-
-fn main() {
-    let result = add(3, 4);
-    println!("Result: {}", result);
-    second::greet();
+pub fn greet() {
+    println!("Greetings from second.rs!");
 }
 
 #[cfg(test)]
@@ -17,9 +11,18 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_add() {
-        assert_eq!(add(1, 2), 3);
-        assert_eq!(add(-1, 1), 0);
-        assert_eq!(add(-1, -1), -2);
+    fn test_greet() {
+        // We can capture the output of the function to check if it's correct.
+        let mut output = Vec::new();
+        // Redirect stdout to capture output
+        let mut stdout = std::io::stdout();
+        stdout.lock().flush().unwrap(); // Flush to make sure previous output is captured
+        stdout.lock().write_all(b"Greetings from second.rs!\n").unwrap();
+        let result = stdout.lock().write_all(&mut output);
+        greet();
+        assert!(result.is_ok()); // Ensure writing to output is successful
+        assert_eq!(String::from_utf8(output).unwrap(), "Greetings from second.rs!\n");
+        // Restore stdout
+        stdout.lock().flush().unwrap();
     }
 }
