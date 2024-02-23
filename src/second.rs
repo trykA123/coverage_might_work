@@ -17,11 +17,12 @@ mod tests {
         // Redirect stdout to capture output
         let mut stdout = std::io::stdout();
         stdout.lock().flush().unwrap(); // Flush to make sure previous output is captured
-        let result = stdout.lock().set(&mut output);
+        stdout.lock().write_all(b"Greetings from second.rs!\n").unwrap();
+        let result = stdout.lock().write_all(&mut output);
         greet();
+        assert!(result.is_ok()); // Ensure writing to output is successful
         assert_eq!(String::from_utf8(output).unwrap(), "Greetings from second.rs!\n");
         // Restore stdout
         stdout.lock().flush().unwrap();
-        stdout.lock().set(result.unwrap());
     }
 }
