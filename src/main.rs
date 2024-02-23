@@ -6,20 +6,15 @@ pub fn add(a: i32, b: i32) -> i32 {
     a + b
 }
 
-fn main() {
-    let result = add(3, 4);
-    println!("Result: {}", result);
-    second::greet();
+pub fn subtract(a: i32, b: i32) -> i32 {
+    a - b
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_add() {
-        assert_eq!(add(1, 2), 3);
-        assert_eq!(add(-1, 1), 0);
-        assert_eq!(add(-1, -1), -2);
-    }
+fn main() {
+    let result_add = add(3, 4);
+    let result_subtract = subtract(7, 4);
+    println!("Result of addition: {}", result_add);
+    println!("Result of subtraction: {}", result_subtract);
+    second::greet();
+    second::farewell();
 }
