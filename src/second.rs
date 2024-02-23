@@ -1,5 +1,7 @@
 // second.rs
 
+use std::io::Write;
+
 pub fn greet() {
     println!("Greetings from second.rs!");
 }
@@ -13,12 +15,13 @@ mod tests {
         // We can capture the output of the function to check if it's correct.
         let mut output = Vec::new();
         // Redirect stdout to capture output
-        std::io::stdout().flush().unwrap(); // Flush to make sure previous output is captured
-        let result = std::io::stdout().lock().set(&mut output);
+        let mut stdout = std::io::stdout();
+        stdout.lock().flush().unwrap(); // Flush to make sure previous output is captured
+        let result = stdout.lock().set(&mut output);
         greet();
         assert_eq!(String::from_utf8(output).unwrap(), "Greetings from second.rs!\n");
         // Restore stdout
-        std::io::stdout().flush().unwrap();
-        std::io::stdout().lock().set(result.unwrap());
+        stdout.lock().flush().unwrap();
+        stdout.lock().set(result.unwrap());
     }
 }
