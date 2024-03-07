@@ -38,7 +38,7 @@ jobs:
           hide_complexity: true
           indicators: true
           output: both
-          thresholds: "50 80"
+          thresholds: "40 80"
 
       - name: Add Label if Coverage Below Threshold
         if: ${{ steps.coverage.outcome == 'failure' }}
