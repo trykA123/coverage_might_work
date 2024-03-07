@@ -2,9 +2,11 @@ name: Rust
 
 on:
   push:
-    branches: ["master"]
+    branches:
+      - '*'  # Run on all branches
   pull_request:
-    branches: ["master"]
+    branches:
+      - '*'  # Run on all branches
 
 env:
   CARGO_TERM_COLOR: always
@@ -36,7 +38,7 @@ jobs:
           hide_complexity: true
           indicators: true
           output: both
-          thresholds: "50 80"
+          thresholds: "60 80"
 
       - name: Add Label if Coverage Below Threshold
         if: ${{ steps.coverage.outcome == 'failure' }}
