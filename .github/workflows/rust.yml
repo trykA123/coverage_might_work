@@ -33,7 +33,7 @@ jobs:
       - name: Build and test
         run: |
           cargo build --verbose
-          cargo test --verbose
+          cargo test > test.xml
 
       # - name: Collect coverage data
       #   run: cargo llvm-cov --cobertura --output-path coverage.xml
@@ -41,11 +41,11 @@ jobs:
       # - name: Run Text coverage data
       #   run: cargo llvm-cov nextest > test.xml
 
-      # - name: Upload coverage report
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: test-coverage
-      #     path: test.xml
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-coverage
+          path: test.xml
 
       # - name: Code Coverage Report
       #   id: coverage
