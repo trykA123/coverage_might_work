@@ -26,4 +26,4 @@ jobs:
       - name: Build and test
         run: |
           cargo build --verbose
-          cargo test -q | grep "test result:"
+          cargo test -q | grep "test result:" > test_coverage.xml
