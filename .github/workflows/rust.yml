@@ -26,13 +26,13 @@ jobs:
       #   run: cargo llvm-cov --cobertura --output-path coverage.xml
 
       - name: Run Text coverage data
-        run: cargo llvm-cov nextest > test_coverage.xml
+        run: cargo llvm-cov nextest > test.xml
 
       - name: Upload coverage report
         uses: actions/upload-artifact@v2
         with:
-          name: test-coverage-report
-          path: test_coverage.xml
+          name: test-coverage
+          path: test.xml
 
       # - name: Code Coverage Report
       #   id: coverage
