@@ -22,17 +22,37 @@ jobs:
       - uses: taiki-e/install-action@cargo-llvm-cov
       - uses: taiki-e/install-action@nextest
 
-      # - name: Collect coverage data
-      #   run: cargo llvm-cov --cobertura --output-path coverage.xml
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Run Text coverage data
-        run: cargo llvm-cov nextest > test.xml
+      - name: Set up Rust
+        uses: actions/setup-rust@v1
+        with:
+          rust-version: nightly
+
+      - name: Run tests with coverage
+        run: |
+          cargo clean
+          RUSTFLAGS="-Zinstrument-coverage" cargo +nightly test
+          grcov . -s . --binary-path ./target/debug/ -t cobertura -o cobertura.xml --branch
 
       - name: Upload coverage report
         uses: actions/upload-artifact@v2
         with:
-          name: test-coverage
-          path: test.xml
+          name: cobertura-coverage-report
+          path: cobertura.xml
+
+      # - name: Collect coverage data
+      #   run: cargo llvm-cov --cobertura --output-path coverage.xml
+
+      # - name: Run Text coverage data
+      #   run: cargo llvm-cov nextest > test.xml
+
+      # - name: Upload coverage report
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: test-coverage
+      #     path: test.xml
 
       # - name: Code Coverage Report
       #   id: coverage
