@@ -25,22 +25,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Rust
-        uses: actions/setup-rust@v1
-        with:
-          rust-version: nightly
-
-      - name: Run tests with coverage
+      - name: Install Rust
         run: |
-          cargo clean
-          RUSTFLAGS="-Zinstrument-coverage" cargo +nightly test
-          grcov . -s . --binary-path ./target/debug/ -t cobertura -o cobertura.xml --branch
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+          export PATH="$HOME/.cargo/bin:$PATH"
 
-      - name: Upload coverage report
-        uses: actions/upload-artifact@v2
-        with:
-          name: cobertura-coverage-report
-          path: cobertura.xml
+      - name: Build and test
+        run: |
+          cargo build --verbose
+          cargo test --verbose
 
       # - name: Collect coverage data
       #   run: cargo llvm-cov --cobertura --output-path coverage.xml
