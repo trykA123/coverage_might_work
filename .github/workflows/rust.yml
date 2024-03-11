@@ -26,4 +26,4 @@ jobs:
       - name: Build and test
         run: |
           cargo build --verbose
-          cargo test --verbose
+          cargo test -q | grep "test result:"
