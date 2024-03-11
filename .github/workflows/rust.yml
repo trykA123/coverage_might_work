@@ -27,3 +27,9 @@ jobs:
         run: |
           cargo build --verbose
           cargo test -q | grep "test result:" > test_coverage.xml
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-coverage-report
+          path: test_coverage.xml
